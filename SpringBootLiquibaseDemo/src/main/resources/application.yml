@@ -1,4 +1,9 @@
+
 spring:
   liquibase:
        change-log: "classpath:/changelog/changeset.xml"
        enabled: true
+server:
+  port: 9080
+
+
