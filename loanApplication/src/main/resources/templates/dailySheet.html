@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout}">
+
+<head>
+	<title>Home</title>
+</head>
+
+<body>
+
+	<div layout:fragment="content">
+		<section class="my-5">
+		<form id="dailySheetForm" th:action="@{/dailySheetByDate}" method="GET">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+
+						<div class="card mt-4">
+							<h2 class="card-header">Daily Sheet</h2>
+							<div class="card-body">
+								
+								<div class="row page-row">
+								
+									<div class="col-3">
+									
+										<div class="input-group date">
+										
+										<span class="fa fa-step-backward fa-2x backDate"></span> &nbsp; &nbsp;&nbsp; &nbsp;
+										    <input type="text" name="dailyDate" th:value="${#dates.format(dailySheetDate, 'dd/MM/yyyy')}" 
+										    data-bind="value: startDate, event: {change: savePerishableDate}"  
+										    class="form-control dailyDate">
+										   <div class="input-group-addon">
+										        <span class="fa fa-calendar fa-2x"></span>
+										    </div> 
+										</div>
+									</div>
+									<div class="col-3">
+										 <span class="fa fa-step-forward fa-2x forwardDate"></span>
+									</div>
+								</div>
+								
+								<input hidden name="navigation" id="navigationId" value=""/>
+								
+								<br>
+								
+								<div id="dailySheet">
+								<div class="accordion" id="accordionExample">
+									<div class="card">
+										<div class="card-header" id="headingOne">
+											<h5 class="mb-0">
+												<button class="btn btn-link" type="button" data-toggle="collapse"
+													data-target="#collapseOne" aria-expanded="false"
+													aria-controls="collapseOne">
+													Return details:
+												</button>
+												Count : <span th:text="${dailySheetModel.returnCount}" /> &nbsp;|
+												&nbsp;Total Amount : <span th:text="${dailySheetModel.totalReturnAmt}" /> &nbsp;|
+												&nbsp;Total Interest : <span th:text="${dailySheetModel.totalReturnInterest}" />
+
+											</h5>
+										</div>
+
+										<div id="collapseOne" class="collapse" aria-labelledby="headingOne"
+											data-parent="#accordionExample">
+											<div class="card-body">
+												<table class="table table-striped">
+													<thead>
+														<tr>
+															<th scope="col">LoanNo</th>
+															<th scope="col">Amount</th>
+															<th scope="col">Interest</th>
+														</tr>
+													</thead>
+													<tbody>
+														<tr class="rowItem" th:each="element : ${dailySheetModel.returnList}">
+														<td th:id="${element.loanNo}">
+														      <a href='#'  th:onclick="viewLoan([[${element}]]);"
+												               th:text="${element.loanNo}"> </a>
+		         										</td>
+															<td th:text="${element.loanAmt}"> </td>
+															<td th:text="${element.interestReceived}"> </td> 
+														</tr>
+													</tbody>
+												</table>
+
+											</div>
+										</div>
+									</div>
+									<div class="card">
+										<div class="card-header" id="headingTwo">
+											<h5 class="mb-0">
+												<button class="btn btn-link" type="button" data-toggle="collapse"
+													data-target="#collapseTwo" aria-expanded="false"
+													aria-controls="collapseTwo">
+													Loan details
+												</button>
+
+											Count : <span th:text="${dailySheetModel.loanCount}" /> &nbsp;|
+												&nbsp;Total Amount : <span th:text="${dailySheetModel.totalLoanAmt}" /> &nbsp;|
+												&nbsp;Total Interest : <span th:text="${dailySheetModel.totalLoanInterest}" />
+
+											</h5>
+										</div>
+
+										<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
+											data-parent="#accordionExample">
+											<div class="card-body">
+
+												<table class="table table-striped">
+													<thead>
+														<tr>
+
+															<th scope="col">LoanNo</th>
+															<th scope="col">Amount</th>
+															<th scope="col">Interest</th>
+														</tr>
+													</thead>
+													<tbody>
+														<tr class="rowItem" th:each="element : ${dailySheetModel.loanList}">
+														<td th:id="${element.loanNo}">
+														      <a href='#'  th:onclick="viewLoan([[${element}]]);"
+												               th:text="${element.loanNo}"> </a>
+		         										</td>
+															<td th:text="${element.loanAmt}"> </td>
+															<td th:text="${element.loanInterest}"> </td> 
+														</tr>
+													</tbody>
+												</table>
+
+
+											</div>
+										</div>
+									</div>
+
+								</div>
+								</div>
+							</div>
+						</div>
+					</div></div></div>
+		</form>
+		</section>
+
+	</div>
+	
+
+
+</body>
+
+</html>
+

@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout}">
+
+<head>
+<script type="text/javascript" 
+	th:src="@{/js/editloan.js}"></script>
+
+	<title>Edit Loan</title>
+</head>
+
+<body>
+
+	<div layout:fragment="content">
+		<section class="my-5">
+			<div class="container">
+				<form id="editLoanForm" th:action=@{/editLoanSubmit} th:object="${loanDetails}" method="Post">
+				<div class="card mt-4">
+					<h2 class="card-header">Edit Loan</h2>
+					<div class="card-body">
+						
+						<div class="alert alert-success" role="alert" th:if="${editSuccess}">
+							Successfully Edited
+						</div>
+						
+						<div th:if="${loanDetails.loanAmt==0}">
+						
+						<div class="col-2">
+							<label>Loan No</label>
+							<div class="input-group ">
+								<input  class="form-control" id="loanNo" th:field=*{loanNo} maxlength="5" required>
+								&nbsp;&nbsp;&nbsp;
+								<button class="btn btn-primary"  id="editLoanGo" th:formaction="@{/editLoan}" th:formmethod="GET" type="submit"> Go </button> 
+							</div>
+						</div>
+						</div>
+						
+						<div th:if="${loanDetails.loanAmt!=0}">
+						
+						
+						<div class="row page-row align-items-start justify-content-start ">
+							<div class="col-2">
+									<label>Loan No</label>
+									<div class="input-group ">
+										<input  class="form-control" th:field="*{loanNo}" readonly>
+											
+									</div>
+							</div>
+							<div class="col-2">
+								<label>Loan Date</label>
+								<div class="input-group">
+									<input  class="form-control" readonly  th:value="${#dates.format(loanDateFmt, 'dd/MM/yyyy')}">
+										
+								</div>
+							</div>
+							
+							
+							<div class="col-2">
+								<label>Amount</label>
+								<input  class="form-control validationAmt"
+									type="number" id="loanAmt" th:field="*{loanAmt}" maxlength="10">
+								<span hidden class="text-danger validationAmtSpan">This field is
+									required</span>
+							</div>
+							<div class="col-2">
+								<label>Interest Rate</label>
+								<select id="interestSelected" 
+									class="form-control validationInterest" th:field="*{interestRate}">
+									<option value="0">Select</option>
+									<option value="5" >5</option>
+									<option value="4">4</option>
+									<option value="3">3</option>
+									<option value="2.5">2.5</option>
+									<option value="2">2</option>
+								</select>
+								<span hidden class="text-danger validationInterestSpan">This field is
+									required</span>
+							</div>
+							
+							<div class="col-2">
+										<label>Amount given</label>
+										<input 
+											class="form-control" th:field="*{amountGiven}" id="amountToGive" type="number" maxlength="8">
+										
+									</div>
+							
+						</div>
+						<br>
+						
+
+						<div class="card mt-4">
+							<h5 class="card-header">Loaner Details </h5>
+							<div class="card-body">
+
+								<div class="row page-row">
+									<div class="col-3">
+										<label>Loaner Name</label>
+										<input 
+											class="form-control validationFname" id="firstName" th:field="*{fName}"  type="text" maxlength="20">
+										<span hidden class="text-danger validationFnameSpan">This field is
+									required</span>
+									</div>
+									
+									<div class="form-check-inline">
+									      <label class="form-check-label" for="s/o">
+									        <input type="radio" class="form-check-input" id="s/o" th:field="*{relation}" value="s/o" checked>s/o
+									      </label>
+									    </div>
+									    <div class="form-check-inline">
+									      <label class="form-check-label" for="w/o">
+									        <input type="radio" class="form-check-input" id="w/o" th:field="*{relation}" value="w/o">w/o
+									      </label>
+									    </div>
+									    <div class="form-check-inline">
+									          <label class="form-check-label" for="d/o">
+									        <input type="radio" class="form-check-input" id="d/o" th:field="*{relation}" value="d/o">d/o
+									      </label>
+									    </div>
+									    <div class="form-check-inline">
+									      <label class="form-check-label" for="c/o">
+									        <input type="radio" class="form-check-input" id="c/o" th:field="*{relation}" value="c/o">c/o
+									      </label>
+									    </div>
+
+									<div class="col-3">
+										<label>Last Name</label>
+										<input 
+											class="form-control validationLname" id="lastName" th:field="*{lName}" 
+											type="text" maxlength="20">
+										<span hidden class="text-danger validationLnameSpan">This field is
+									required</span>
+									</div>
+
+									<div class="col-3">
+										<label>Phone Number</label>
+										<input 
+											class="form-control" th:field="*{mobileNo}" type="text" maxlength="10">
+										
+									</div>
+								</div>
+
+								<br>
+
+								<div class="row page-row">
+									<div class="col-3">
+										<label>Place</label>
+										<input 
+											class="form-control validationPlace" id="place" th:field="*{place}" 
+											type="text" maxlength="25">
+											<span hidden class="text-danger validationPlaceSpan">This field is
+									required</span>
+									</div>
+
+									<div class="col-3">
+										<label>Street Name</label>
+										<input 
+											class="form-control" id="street" th:field="*{streetName}" type="text"
+											maxlength="10">
+									</div>
+									
+									<div class="col-5">
+
+										<label>Additional infomation</label>
+										<input 
+											class="form-control" th:field="*{additionalInfo}" type="text" maxlength="50">
+
+									</div>
+									
+								</div>
+
+								
+							</div>
+						</div>
+
+			
+						<div class="card mt-4">
+							<h5 class="card-header">Loan Item Details </h5>
+							<div class="card-body">
+								<div class="row page-row align-items-start">
+									<div class="col-5">
+										<label>Items</label>
+										<textarea 
+											class="form-control validationItem" th:field="*{items}" maxlength="100">
+										</textarea>
+										<span hidden class="text-danger validationItemSpan">This field is
+									required</span>
+									</div>
+									<div class="col-2">
+
+										<label>Net weight</label>
+										<input
+											class="form-control validationWeight" th:field="*{netWeight}" step="0.01" type="number"
+											maxlength="10">
+										<span hidden class="text-danger validationWeightSpan">This field is
+									required</span>
+
+										
+									</div>
+
+									<div class="col-5">
+
+										<label>Item Description</label>
+										<input 
+											class="form-control" th:field="*{description}" type="text" maxlength="10">
+
+									</div>
+
+								</div>
+							</div>
+							</div>
+							
+								<br>
+								
+				
+								<button type="button" class="btn btn-primary editLoanSubmit">submit</button>
+						</div>
+
+					</div>
+				</div>
+						
+			
+			
+		</form>
+		</div>
+		</section>
+
+	</div>
+
+</body>
+
+</html>

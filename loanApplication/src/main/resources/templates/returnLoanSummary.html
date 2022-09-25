@@ -1,0 +1,99 @@
+ <hr>
+<div th:if="${returnSummaryList == null}">		
+	No data found
+</div>
+
+<div th:if="${returnSummaryList !=null}">		
+	
+	<div class="card mt-4">
+		<div class="card-body">
+		<table id="returnTable" class="table table-bordered table-striped" style="width: 95%;">
+		 <thead>
+			<th style="width:5%"> LoanNo </th>
+			<th style="width:5%"> LoanAmt </th>
+			<th style="width:5%"> Interest </th>
+			<th style="width:10%"> Total    </th>
+			<th style="width:40%"> Total Months  </th>
+			<th style="width:5%"> Action    </th>
+		<thead>
+		    <tr class="rowItem" th:each="element : ${returnSummaryList}">
+		        <td th:id="${element.loanNo} +'_' + ${element.actualInterest}">
+		         <a href='#'  th:onclick="viewLoan([[${element.loanDetails}]]);"
+                      th:text="${element.loanNo}"> </a>
+		         </td>
+		        
+		        <td class="loanAmt" th:text="${element.loanAmt}">  </td>
+		        <td> <input type="text" onchange="interestRtnChg(this);" size="7" class="interestRtn" th:value="*{element.interest}"> </td>
+		    	<td class="sum" th:text="${element.sum}"> </td>
+		    	
+		    	<td th:text="${element.comments} + 'Calculated from FirstMonth: ' + ${element.loanDetails.calcFromCurrentMonth}"> </td>
+		    	<td>
+		    	
+		    	&nbsp; <span class="fas fa-trash deleteReturnLoan"> </span> </td>
+		    </tr>
+		   
+		</table>
+		</div>
+		
+			<b>
+				<div class="row">
+				    &nbsp; &nbsp; &nbsp; &nbsp;  Total Sum: &nbsp;
+					<div id="onload">
+					<span id="totalSumOnload" th:text="${returnSummaryList[#lists.size(returnSummaryList)-1].totalSum}"> </span>
+					</div>
+					<div id="offload">
+					<span id="totalSumoffLoad"> </span>
+					</div>
+				</div>
+			</b>
+			
+			 <hr>
+			<div id="returnAction">
+				
+						<div class="col-6">
+									&nbsp; &nbsp;<b> <label>Returner Info:</label> </b>
+									<div class="input-group ">
+										&nbsp; &nbsp;<input class="form-control col-10"  id="returnerInfo">
+									</div>
+						</div>
+						<br>
+
+				
+					
+						&nbsp; &nbsp; <button th:onclick="startCameraReturn();" class="btn btn-outline-primary" type="button">Start</button>
+						&nbsp; &nbsp; <video id="videoReturn" width="150" height="125" autoplay></video>
+						<button type="button" th:onclick="clickPhotoReturn();" class="btn btn-outline-primary">capture</button>
+						<canvas id="canvasReturn" width="150" height="125"></canvas>
+						<input hidden id="returnBy"/>
+						
+						<hr>
+								&nbsp;&nbsp; &nbsp;<button th:onclick="returnSubmit();" id="returnLoan" type="button" class="btn btn-primary">submit</button>
+						<br>
+						
+			</div>
+			<br>
+			
+			
+		</div>
+	</div>
+</div>
+
+<div class="modal fade custom-modal-font" tabindex="-1" role="dialog" id="viewLoanModal" >
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4>Loan Details</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div id="loanStuff"></div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+

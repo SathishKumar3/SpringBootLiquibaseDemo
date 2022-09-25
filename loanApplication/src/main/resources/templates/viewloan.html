@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout}">
+
+<head>
+	<title>View Loan</title>
+</head>
+
+<body>
+
+	<div layout:fragment="content">
+		<section class="my-5">
+			<div class="container">
+				<form name="viewLoanForm" method="GET">
+				<div class="card mt-4">
+					<h2 class="card-header">View Loan</h2>
+					<div class="card-body">
+						<div class="col-2">
+							<label>Loan No</label>
+							<div class="input-group ">
+								<input  class="form-control" id="loanNo" maxlength="5" required>
+								&nbsp;&nbsp;&nbsp;
+								<button class="btn btn-primary" id="viewLoanGo" type="button"> Go </button> 
+							</div>
+						</div>
+						
+						<div id="loanResults">
+							
+						</div>
+						
+						
+						
+
+					</div>
+				</div>
+						
+			
+			
+		</form>
+		</div>
+		</section>
+
+	</div>
+
+</body>
+
+</html>

@@ -1,0 +1,140 @@
+<hr>
+<div th:if="${loanDetails == null}">		
+	No data found
+</div>
+
+
+<div th:if="${loanDetails !=null}">		
+	<div class="card mt-4">
+		<div class="card-body">
+			 <div class="float-child">
+			 	<table>
+			 	<tr>
+			 		<td> Amount : </td>
+			 		<td> <b th:text="${loanDetails.loanAmt}"> </b> </td>
+			 	</tr>
+			 	<tr>
+			 		<td> Loan No : </td>
+			 		<td> <b th:text="${loanDetails.loanNo}"> </b> </td>
+			 	</tr>
+			 	<tr>
+			 		<td> Loan Date: </td>
+			 		<td> <b th:text="${#dates.format(loanDetails.loanDate, 'dd/MM/yyyy')}"> </b> </td>
+			 	</tr>
+			 	
+			 	<tr>
+			 		<td> InterestRate: </td>
+			 		<td> <b th:text="${loanDetails.interestRate}"> </b> </td>
+			 	</tr>
+			 	
+			 	<tr>
+			 		<td> Amount Given: </td>
+			 		<td> <b th:text="${loanDetails.amountGiven}"> </b> </td>
+			 	</tr>
+			 	
+			 	<tr>
+			 		<td> Items: </td>
+			 		<td> <b th:text="${loanDetails.items}"> </b> </td>
+			 	</tr>
+			 	
+			 	<tr>
+			 		<td> Description: </td>
+			 		<td> <b th:text="${loanDetails.description}"> </b> </td>
+			 	</tr>
+			 	
+			 	<tr>
+			 		<td> Net Weight: </td>
+			 		<td> <b th:text="${loanDetails.netWeight}"> </b> </td>
+			 	</tr>
+			 	
+			 	<tr>
+			 		<td> AdditionalInfo: </td>
+			 		<td> <b th:if="${not #strings.isEmpty(loanDetails.additionalInfo)}" class="text-success" th:text="${loanDetails.additionalInfo}"> </b> </td>
+			 	</tr>
+			 	
+			 	<tr>
+			 		<td> Curr Month int: </td>
+			 		<td> <b th:text="${loanDetails.calcFromCurrentMonth}"> </b> </td>
+			 	</tr>
+			 	
+			 	</table>
+				
+				
+			</div>
+			<div class="float-child">
+			
+				<table>
+				
+				<tr>
+			 		<td> Fname: </td>
+			 		<td> <b th:text="${loanDetails.fName}"> </b> </td>
+			 	</tr>
+			 	
+			 	<tr>
+			 		<td> Lname: </td>
+			 		<td> <b th:text=" ${loanDetails.relation} + ' ' + ${loanDetails.lName}"> </b> </td>
+			 	</tr>
+			 	
+			 	<tr>
+			 		<td> Place: </td>
+			 		<td> <b th:text="${loanDetails.place}"> </b> </td>
+			 	</tr>
+			 	
+			 	<tr>
+			 		<td> Street: </td>
+			 		<td> <b th:text="${loanDetails.streetName}"> </b> </td>
+			 	</tr>
+			 	
+			 	<tr>
+			 		<td> Mobile: </td>
+			 		<td> <b th:text="${loanDetails.mobileNo}"> </b> </td>
+			 	</tr>
+				</table>	
+				
+			</div>
+			<div class="float-child">
+			
+				<table>
+				<tr>
+			 		<td> Loan By: </td>
+			 		<td> <img th:src="${loanDetails.loanByImg}"> </td>
+			 	</tr>
+				</table>
+			</div>
+			
+			
+		</div>
+	</div>
+		<div class="card mt-4">
+			<div class="card-body">
+				<div class="float-child">
+				
+					<table>
+						<tr>
+					 		<td> Returned Date: </td>
+					 		<td> <b th:text="${#dates.format(loanDetails.returnDate, 'dd/MM/yyyy')}"> </b> </td>
+					 	</tr>
+					 	<tr>
+					 		<td> Interest Received: </td>
+					 		<td> <b th:text="${loanDetails.interestReceived}"> </b> </td>
+					 	</tr>
+					 	<tr>
+					 		<td> ReturnerInfo: </td>
+					 		<td> <b th:text="${loanDetails.returnerInfo}"> </b> </td>
+					 	</tr>
+					 	
+					</table>
+				</div>
+				<div class="float-child">
+					<table>
+						<tr>
+					 		<td> Returned By:  </td>
+					 		<td> <img th:src="${loanDetails.returnByImg}">  </td>
+					 	</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+						

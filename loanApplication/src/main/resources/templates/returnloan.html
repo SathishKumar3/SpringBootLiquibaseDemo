@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout}">
+
+<head>
+	<title>Return Loan</title>
+	
+	
+</head>
+
+<body>
+
+	<div layout:fragment="content">
+		<section class="my-5">
+			<div class="container">
+				<form name="returnLoanForm" method="GET">
+				<div class="card mt-4">
+					<h2 class="card-header">Return Loan</h2>
+					<div class="card-body">
+						<div id="returnMesage" class="alert alert-success" style="display: none;">
+					  		<strong>Success!</strong> Loan returned successfully.
+						</div>
+						<div class="col-2">
+							<label>Loan No</label>
+							<div class="input-group ">
+								<table id="loanNolist">
+							        <tr>
+							            <td><input class="form-control col-12" name="loanNo[]"  maxlength="5" required></td>
+							            <td> &nbsp; </td>
+							            <td> <span id="returnPlusIcon"> <i class="fas fa-plus"></span></td>
+							           
+							            
+							        </tr>
+   								 </table>
+								
+								
+							</div>
+							<br>
+							<div> 
+							
+							<button class="btn btn-primary" id="returnLoan" type="button"> Calculate </button> 
+							</div>
+						</div>
+						
+						<div id="returnLoanSummary">
+							
+						</div>
+						
+						
+					</div>
+				</div>
+						
+			
+			
+		</form>
+		</div>
+		</section>
+
+	</div>
+	
+	
+<script>
+$(document).ready(function(){
+  $('#info').tooltip();   
+  $('#returnMesage').hide();
+});
+</script>
+
+
+</body>
+
+</html>

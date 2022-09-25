@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout}">
+
+<head>
+	<title>View Loan</title>
+	
+</head>
+
+<body>
+
+	<div layout:fragment="content">
+		<section class="my-5">
+			<div class="container">
+				
+					<div class="card mt-4">
+						<h2 class="card-header">Loan Summary</h2>
+						<div class="card-body">
+
+							<div class="row page-row align-items-start justify-content-start">
+								<div class="col-2">
+									<label>Loan No: </label> <b th:text="${loanDetails.loanNo}"> </b>  
+								</div>
+								<div class="col-3">
+									<label >Loan Date:</label> <b th:text="${#dates.format(loanDetails.loanDate, 'dd/MM/yyyy')}"> </b> 
+								</div>
+
+								<div class="col-2">
+									<label>Amount:</label> <b th:text="${loanDetails.loanAmt}"> </b>
+
+								</div>
+								
+							</div>
+							
+							<br>
+							<div class="row"> 
+								<div class="col-12">
+									<label>Items: </label> <b th:text="${loanDetails.items}"> </b>  
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-2">
+									<label>Net Weight: </label> <b th:text="${loanDetails.netWeight}"> </b>  
+								</div>
+								<div class="col-2">
+									<label>Item Description: </label> <b th:text="${loanDetails.description}"> </b>  
+								</div>
+							</div>
+							
+							<br>
+							
+							
+							<div class="row"> 
+								<div class="col-2">
+									<label>Amount detect:</label>  <b th:text="${detection}"> </b>
+								</div>
+								<div class="col-3">
+									<label>Amount To Give:</label>  <b th:text="${loanDetails.amountGiven}"> </b>
+								</div>
+							</div>
+						</div>
+					</div>
+
+			</div>
+		</section>
+
+	</div>
+
+</body>
+
+</html>

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout}">
+
+
+<head>
+	<title>Home</title>
+	
+
+ 
+</head>
+<body>
+
+
+
+<div layout:fragment="content">
+    <section class="my-5">
+    <form id="searchForm" th:action="@{/searchLoan}" th:object="${searchRequest}" method="Post">
+        <div class="container">
+            
+                <div class="card mt-4">
+							<h2 class="card-header">Search Loan</h2>
+							
+							
+       <div class="card-body">
+       <div class="row page-row">
+       
+	       <div class="col-4">
+				<div class="input-group date">
+				    <label>Start Date</label>
+				    <input type="text" th:field="*{startDate}" data-bind="value: startDate, event: {change: savePerishableDate}"   class="form-control">
+				     <div class="input-group-addon">
+				        <span class="fa fa-calendar fa-2x"></span>
+				    </div> 
+				</div>
+			</div>
+			<div class="col-4">
+				<div class="input-group date">
+				    <label>End Date</label>
+				    <input type="text" th:field="*{endDate}" data-bind="value: startDate, event: {change: savePerishableDate}"  class="form-control">
+				     <div class="input-group-addon">
+				        <span class="fa fa-calendar fa-2x"></span>
+				    </div> 
+				</div>
+			</div>
+				
+			<div class="col-2">
+				<select th:field="*{type}"
+					class="form-control">
+					<option value="">LoanType</option>
+					<option value="1" >gold</option>
+					<option value="2">Silver</option>
+				</select>		
+			</div>
+			
+			<div class="col-2">
+				<select th:field="*{returnOption}"
+					class="form-control">
+					<option value="">ReturnStatus</option>
+					<option value="1" >nonReturn</option>
+					<option value="2">return</option>
+				</select>		
+			</div>
+       </div>
+								
+       <br>
+       
+        <div class="row page-row">
+          <div class="col-3">
+            <label>Loaner Name</label>
+            <input class="form-control" type="text" id="firstName" th:onkeyup="loanerNamed()"  th:field="*{fname}" maxlength="20">
+          </div>
+          <div class="col-3">
+            <label>Last Name</label>
+            <input class="form-control" id="lastName"  th:field="*{lname}" type="text" maxlength="20">
+          </div>
+          <div class="col-3">
+            <label>Place</label>
+            <input class="form-control" id="place" th:field="*{place}" type="text" maxlength="20">
+          </div>
+          <div class="col-3">
+            <label>MobileNo</label>
+            <input class="form-control" th:field="*{mobileNo}" type="text" maxlength="10">
+          </div>
+          </div>
+          <br>
+          <div class="row">
+          	&nbsp; &nbsp; 
+          	<button type="submit" name="searchAction" class="btn btn-primary">Search</button>
+          </div>
+       </div>  
+       
+       <input type="hidden" id="pageNo" th:field="*{pageNo}">
+       
+      <hr>
+       
+       <div class="card-body" th:if="${searchResults!=null}">
+       
+		<table id="returnTable" class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>LoanNo </th>
+            <th>LoanAmt </th>
+            <th>Fname</th>
+            <th>Item</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr th:each="item : ${searchResults.content}">
+            
+            <td> <a href='#'  th:onclick="viewLoan([[${item}]]);"
+                      th:text="${item.loanNo}"> </a> </td>
+            <td th:text="${item.loanAmt}" />
+            <td th:text="${item.fName}" />
+            <td th:text="${item.items}" />
+        </tr>
+    </tbody>
+</table>
+
+       </div>
+
+
+
+<div th:if="${totalPages > 1}">
+            <div class="row col-12">
+                <div class="col-3">
+                    Total Rows: [[${totalItems}]]
+                </div>
+                <div class="col-3">
+                    <span th:each="i: ${#numbers.sequence(1, totalPages)}">
+      <a th:if="${currentPage != i}" href="javascript:void(0);" th:onclick="pageAction([[${i}]]);" >[[${i}]] </a>
+      <span th:unless="${currentPage != i}">[[${i}]]</span> &nbsp; &nbsp;
+                    </span>
+                </div>
+                
+
+                
+            </div>
+        </div>
+       </div>
+       
+       <div class="modal fade custom-modal-font" tabindex="-1" role="dialog" id="viewLoanModal" >
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4>Loan Details</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div id="loanStuff"></div>
+
+      </div>
+    </div>
+  </div>
+</div>
+                   
+                </div>
+            </div>
+        </div>
+    </form>
+    </section>
+    
+</div>
+
+
+
+
+</body>
+</html>

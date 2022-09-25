@@ -1,0 +1,12 @@
+nav {
+    font-weight: bold;
+}
+
+
+
+.float-child {
+    width: 30%;
+    float: left;
+    padding: 2px;
+    
+}  
