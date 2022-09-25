@@ -1,4 +1,0 @@
-spring:
-  liquibase:
-       change-log: "classpath:/changelog/changeset.xml"
-       enabled: true
